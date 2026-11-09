@@ -1,0 +1,27 @@
+======================================================================
+DJANGO ADMINISTRATION DASHBOARD SPECIFICATION - ONLINE COURSE APP
+======================================================================
+
+[AUTHENTICATION AND AUTHORIZATION]
+ └─ Groups
+ └─ Users
+
+[ONLINECOURSE]
+ └─ Courses
+     └─ Inlines: QuestionInline
+     └─ Fields: name, is_enrolled
+ └─ Lessons
+     └─ Fields: title
+ └─ Instructors
+ └─ Learners
+ └─ Questions
+     └─ Inlines: ChoiceInline
+     └─ Fields: question_text, course, grade
+ └─ Choices
+     └─ Fields: choice_text, is_correct
+ └─ Submissions
+     └─ Fields: enrollment, choices, date_submitted
+
+======================================================================
+STATUS: All 7 registered model classes successfully verified.
+======================================================================
