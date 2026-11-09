@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Exam Results</title>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://bootstrapcdn.com">
+</head>
+<body class="bg-light">
+<div class="container mt-5">
+    <div class="card shadow">
+        <!-- Success Alert Header Block -->
+        <div class="card-header bg-success text-white text-center p-4">
+            <h1 class="display-4 font-weight-bold">Congratulations!</h1>
+            <p class="lead mb-0">You have successfully completed the examination attempt.</p>
+        </div>
+        
+        <div class="card-body p-5">
+            <!-- Score Overview Dashboard Component -->
+            <div class="alert alert-info text-center py-4 mb-4">
+                <h3 class="mb-1">Your Total Exam Score</h3>
+                <span class="display-3 font-weight-bold text-dark">{{ total_score }}</span>
+                <p class="text-muted mt-2 mb-0">Points Achieved</p>
+            </div>
+
+            <!-- Detailed Question Results Evaluation Breakdown Loop -->
+            <h4 class="mb-3 border-bottom pb-2 text-secondary">Question Assessment Breakdown</h4>
+            {% for res in results %}
+                <div class="card mt-3 border">
+                    <div class="card-header d-flex justify-content-between align-items-center bg-white py-3">
+                        <span class="font-weight-bold text-dark">Q{{ forloop.counter }}: {{ res.question.question_text }}</span>
+                        {% if res.is_correct %}
+                            <span class="badge badge-pill badge-success px-3 py-2">Correct</span>
+                        {% else %}
+                            <span class="badge badge-pill badge-danger px-3 py-2">Incorrect</span>
+                        {% endif %}
+                    </div>
+                    <div class="card-body bg-light">
+                        <h6 class="text-muted font-weight-bold small uppercase mb-2">Your Submitted Selections:</h6>
+                        <ul class="list-unstyled pl-3 mb-0">
+                        {% for choice in res.selected_choices %}
+                            <li class="text-dark font-italic py-1">✓ {{ choice.choice_text }}</li>
+                        {% empty %}
+                            <li class="text-danger small">No options were selected for this question block.</li>
+                        {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            {% endfor %}
+
+            <!-- Return Actions Interface Navigation Anchor -->
+            <div class="text-center mt-5">
+                <a href="{% url 'onlinecourse:course_details' course.id %}" class="btn btn-primary btn-lg px-5 shadow-sm">Return to Course Overview</a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
